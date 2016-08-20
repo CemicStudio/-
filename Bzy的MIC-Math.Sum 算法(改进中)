@@ -1,0 +1,148 @@
+Part1:Import Math.BasicFunc.Sum
+
+    Public Shared Function Sum(ByVal a As String, ByVal b As String) As String
+        '大数加
+        On Error Resume Next
+
+        Dim i1, i2 As String
+        Dim j1, j2 As String
+        Dim Off As Long
+        Dim Upstaer As Boolean
+        Dim isdouble As Boolean
+
+        '初值
+        Sum = ""
+        i1 = "'"
+        i2 = ""
+        j1 = ""
+        j2 = "'"
+
+        '部分获取
+        i1 = GetBstr(a, ".")(1)
+        i2 = GetBstr(a, ".")(2)
+        j1 = GetBstr(b, ".")(1)
+        j2 = GetBstr(b, ".")(2)
+        '----------------------------------------------
+        '对齐
+        If Len(i1) < Len(j1) Then
+            Off = Len(j1) - Len(i1)
+            i1 = Outstr("0", Off) & i1
+        ElseIf Len(i1) = Len(j1) Then
+        Else
+            Off = Len(i1) - Len(j1)
+            j1 = Outstr("0", Off) & j1
+        End If
+
+        isdouble = Len(i2) <> 0 And Len(j2) <> 0
+
+        If Not isdouble Then GoTo l
+
+        If Len(i2) < Len(j2) Then
+            Off = Len(j2) - Len(i2)
+            i2 &= Outstr("0", Off)
+        ElseIf Len(i2) = Len(j2) Then
+        Else
+            Off = Len(i2) - Len(j2)
+            j2 &= Outstr("0", Off)
+        End If
+        '---------------------------------------------
+l:
+        i1 = "0" & i1 & i2
+        j1 = "0" & j1 & j2
+        '竖式计算
+        For Off = 1 To Len(i1)
+            Dim value As Integer = Val(mid(i1, Len(i1) + 1 - Off, 1)) + Val(mid(j1, Len(i1) + 1 - Off, 1))
+            If Upstaer Then value += 1
+            If value < 10 Then
+                Sum = value & Sum
+                Upstaer = False
+            Else
+                Sum = value - 10 & Sum
+                Upstaer = True
+            End If
+        Next
+        '去首0
+        Do
+            If mid(Sum, 1, 1) = "0" Then
+                Sum = mid(Sum, 2, Len(Sum) - 1)
+            Else
+                Exit Do
+            End If
+        Loop
+
+
+        If Not isdouble Then Exit Function
+
+        Sum = mid(Sum, 1, Len(Sum) - Len(i2)) & "." & mid(Sum, Len(Sum) - Len(i2) + 1, Len(i2))
+        '去尾0
+        Do
+            If mid(Sum, Len(Sum), 1) = "0" Then
+                Sum = mid(Sum, 1, Len(Sum) - 1)
+            Else
+                Exit Do
+            End If
+        Loop
+        '去小数点
+        If mid(Sum, Len(Sum), 1) = "." Then
+            Sum = mid(Sum, 1, Len(Sum) - 1)
+        End If
+
+        Return Sum
+
+    End Function
+    
+Part2: MICL中被引用的函数
+  1.import MICL.FString.mid
+  
+   Shared Function mid(ByVal str As String, ByVal start As Long, ByVal lenght As Long)
+        '获取中间字符
+        mid = Strings.Right(str, Len(str) - start + 1)
+        mid = Strings.Left(mid, lenght)
+    End Function
+
+  2.import MICL.FString.Outstr
+  
+   Shared Function Outstr(ByVal str As String, ByVal number As Integer) As String
+        '输出一定数量同字符本文
+        Dim i As Integer = 0
+
+        Outstr = ""
+
+        Do Until i = number
+            i += 1
+            Outstr &= str
+        Loop
+
+    End Function
+
+3.import MICL.FString.GetBstr
+
+   Shared Function GetBstr(ByVal str As String, ByVal Sign As String) As String()
+        '*****************************************************
+        '****************获取分隔符之间的字符**************
+        '*****************版权：MICstudios*****************
+        '*****************************************************
+        On Error Resume Next
+        Dim i As Integer
+        Dim Strings() As String
+        Dim Seat() As Integer
+        Dim index As Integer
+
+        ReDim Preserve Seat(0)
+        Seat(0) = 0
+
+        If Not mid(str, Len(str), 1) = Sign Then str &= Sign
+
+        For i = 1 To Len(str)
+            If mid(str, i, 1) = Sign Then
+                index += 1
+                ReDim Preserve Seat(index), Strings(index)
+                Seat(index) = i
+                Dim lenght As Integer = Seat(index) - Seat(index - 1) - 1
+                Strings(index) = mid(str, Seat(index - 1) + 1, lenght)
+            End If
+        Next
+
+        Return Strings
+    End Function
+
