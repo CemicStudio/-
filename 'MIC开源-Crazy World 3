@@ -1,0 +1,196 @@
+'MIC开源-Creazy World 3
+Public Class Form1
+    Public IsStart As Boolean
+    Public UDT As Integer
+    Private CT1 As Integer
+    Private CT2 As Integer
+    Private Q As Boolean
+    Private keyprass As String
+
+    Public Function Timed(ByVal second As Integer) As String
+        Dim a, b, c
+        c = second \ 3600
+        b = (second - c * 3600) \ 60
+        a = second - 3600 * c - 60 * b
+
+        c = Format(c, "00")
+        b = Format(b, "00")
+        a = Format(a, "00")
+        Return c & ":" & b & ":" & a
+    End Function
+
+    Public Sub UDie()
+        Timer1.Enabled = False
+        IsStart = False
+        Timer1.Interval = 1000
+        MsgBox("You Die")
+        CLabel2.CText = "Click to start game"
+        Label1.Text = "Left      00:02:00"
+        Label1.Enabled = False
+        Label3.Visible = False
+        LineShape1.Visible = True
+        Panel2.Size = New Size(600, 500)
+        Panel1.Location = New Size(47, 223)
+        UDT += 1
+        CT1 = 0
+        CT2 = 0
+    End Sub
+
+    Private Sub CLabel2_Clicks(ByVal sender As Object, ByVal e As System.EventArgs) Handles CLabel2.Clicks
+        IsStart = Not IsStart
+        If IsStart Then
+            CLabel2.CText = "Click to stop game"
+            Timer1.Enabled = True
+            Label1.Enabled = True
+            Panel2.Size = New Size(0, 0)
+        Else
+            CLabel2.CText = "Click to start game"
+            Timer1.Enabled = False
+            Label1.Enabled = False
+            Panel2.Size = New Size(600, 500)
+        End If
+    End Sub
+
+    Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        Static i As Integer
+        i = i + 1
+        Label1.Text = "Left      " & Timed(120 - i)
+        If i = 120 Then
+            Call UDie()
+            i = 0
+        End If
+    End Sub
+
+    Private Sub Form1_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles Me.KeyDown
+        If Not IsStart Then Exit Sub
+        keyprass = e.KeyCode.ToString
+        Select Case keyprass
+            Case "W"
+                Panel1.Top -= 2
+            Case "S"
+                Panel1.Top += 2
+            Case "A"
+                Panel1.Left -= 2
+            Case "D"
+                Panel1.Left += 2
+            Case "Q"
+                If (Not Q) And IsStart Then
+                    MsgBox("成就:解锁Q")
+                End If
+        End Select
+        If Panel1.Left < -20 Then
+            Call UDie()
+        End If
+        If Panel1.Top < -20 Then
+            Call UDie()
+        End If
+        If Panel1.Top > Me.Height - 100 Then
+            Call UDie()
+        End If
+        If Panel1.Left + Panel1.Width >= LineShape1.X1 Then
+            If Label3.Visible Then
+                LineShape1.Visible = False
+            Else
+                If LineShape1.Visible Then Call UDie()
+            End If
+        End If
+        If Panel1.Left + Panel1.Width >= Label3.Left Then
+            If Label3.Visible Then
+                MsgBox("You have no home")
+                Call UDie()
+            Else
+                If Timer1.Enabled Or CT2 < 20 Then
+                    MsgBox("时间君与呆呆君联手干掉了你")
+                    Call UDie()
+                Else
+                    MsgBox("You Win!")
+                    If Q Then
+                        MsgBox("解锁成就Q")
+                    Else
+                        MsgBox("缺少成就Q")
+                    End If
+                    End
+                End If
+            End If
+        End If
+
+    End Sub
+
+    Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        Panel2.Size = New Size(600, 500)
+    End Sub
+
+    Private Sub Label1_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Label1.MouseDown
+        On Error Resume Next
+        Select Case e.Button
+            Case Windows.Forms.MouseButtons.Left
+                Timer1.Interval = Int(Timer1.Interval / 2)
+            Case Windows.Forms.MouseButtons.Right
+                Timer1.Enabled = False
+                MsgBox("你的无耻惹怒了时间君")
+                MsgBox("接受惩罚吧")
+                Call UDie()
+            Case Windows.Forms.MouseButtons.Middle
+                Timer1.Enabled = False
+                MsgBox("你击败了时间君")
+        End Select
+    End Sub
+
+    Private Sub Panel1_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Panel1.MouseDown
+        On Error Resume Next
+        Select Case e.Button
+            Case Windows.Forms.MouseButtons.Left
+                CT1 += 1
+                Timer1.Enabled = False
+                Select Case CT1
+                    Case 1 To 3
+                        MsgBox("呵呵，别点我")
+                        Timer1.Enabled = True
+                    Case 4 To 6
+                        MsgBox("好痒啊")
+                        Timer1.Enabled = True
+                    Case 7 To 8
+                        MsgBox("警告你，别点我")
+                        Timer1.Enabled = True
+                    Case 9
+                        CT1 = 0
+                        Call UDie()
+                End Select
+            Case Windows.Forms.MouseButtons.Right
+                Timer1.Enabled = False
+                MsgBox("You Die X" & UDT)
+                Timer1.Enabled = True
+            Case Windows.Forms.MouseButtons.Middle
+                CT2 += 1
+                Select Case CT2
+                    Case 1 To 10
+                        MsgBox("还不死心，再点" & 20 - CT2 & "下，有你好看")
+                    Case 11 To 19
+                        MsgBox("我警告你，还有" & 20 - CT2 & "下")
+                    Case 20
+                        MsgBox("你战胜了呆呆君？")
+                        MsgBox("呆呆君即将复仇")
+                End Select
+        End Select
+    End Sub
+
+    Private Sub Label2_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Label2.MouseDown
+        On Error Resume Next
+        Select Case e.Button
+            Case Windows.Forms.MouseButtons.Left
+                Label3.Visible = True
+            Case Windows.Forms.MouseButtons.Right
+                Timer1.Enabled = False
+                MsgBox("You try to get in your home")
+                MsgBox("But…So")
+                Call UDie()
+                Timer1.Enabled = False
+            Case Windows.Forms.MouseButtons.Middle
+                Label3.Visible = True
+        End Select
+    End Sub
+
+    Private Sub Label2_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles Label2.MouseUp
+        If e.Button = Windows.Forms.MouseButtons.Left Then Label3.Visible = False
+    End Sub
+End Class
