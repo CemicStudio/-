@@ -1,0 +1,8 @@
+C++:点
+struct point{
+	float x,y
+	float P_BT(point To){
+		return sprt(pow(abs(x-to.x()),2)+pow(abs(y-to.y()),2))
+	}
+	
+};
