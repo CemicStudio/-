@@ -6,3 +6,18 @@ struct point{
 	}
 	
 };
+
+Import C++:质数
+bool isPn(int inp){
+    if((inp%2==0&&inp!=2)||inp==1)return 0;
+    int i;bool asd=true;
+    int d=sqrt(inp);
+    for(i=3;i<=d;i+=2){
+        if(inp%i==0){
+            asd=false;
+            return asd;
+        }
+    }
+    return asd;
+}
+
