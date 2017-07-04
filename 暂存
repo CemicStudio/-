@@ -21,3 +21,12 @@ bool isPn(int inp){
     return asd;
 }
 
+Import C++ 高精整数加
+string Hsum(char a[],char b[]){ int i;string h="";
+	FFor(i,max(strlen(a),strlen(b))-1,0){    
+	if(strlen(a)>strlen(b))ab[i]+=a[i]+(strlen(a)-i<=strlen(b)?b[i-(strlen(a)-strlen(b))]:48)-96;     
+	else ab[i]+=(strlen(b)-strlen(a)<=i?a[i+(strlen(a)-strlen(b))]:48)+b[i]-96;  
+	if(i!=0){ab[i-1]+=ab[i]/10;ab[i]%=10;}    }    
+	if(ab[0]>=10)h="1";    
+	For(i,0,max(strlen(a),strlen(b))-1)h+=(ab[i]%10)+48;    
+return h;}
