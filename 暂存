@@ -21,12 +21,34 @@ bool isPn(int inp){
     return asd;
 }
 
-Import C++ 高精整数加
+Import C++ 高精正整数加A>B
 string Hsum(char a[],char b[]){ int i;string h="";
 	FFor(i,max(strlen(a),strlen(b))-1,0){    
-	if(strlen(a)>strlen(b))ab[i]+=a[i]+(strlen(a)-i<=strlen(b)?b[i-(strlen(a)-strlen(b))]:48)-96;     
-	else ab[i]+=(strlen(b)-strlen(a)<=i?a[i+(strlen(a)-strlen(b))]:48)+b[i]-96;  
-	if(i!=0){ab[i-1]+=ab[i]/10;ab[i]%=10;}    }    
+		if(strlen(a)>strlen(b))ab[i]+=a[i]+(strlen(a)-i<=strlen(b)?b[i-(strlen(a)-strlen(b))]:48)-96;     
+		else ab[i]+=(strlen(b)-strlen(a)<=i?a[i+(strlen(a)-strlen(b))]:48)+b[i]-96;  
+		if(i!=0){ab[i-1]+=ab[i]/10;ab[i]%=10;
+	}  
 	if(ab[0]>=10)h="1";    
 	For(i,0,max(strlen(a),strlen(b))-1)h+=(ab[i]%10)+48;    
-return h;}
+return h;
+}
+
+Import C++ 高精正整数减
+string Hsub(char a[],char b[]){ 
+	int i;string h="";bool first=false;   
+	FFor(i,max(strlen(a),strlen(b))-1,0){     
+		if(strlen(a)>strlen(b))ab[i]+=a[i]-(strlen(a)-i<=strlen(b)?b[i-(strlen(a)-strlen(b))]:48);    
+		else ab[i]+=(strlen(b)-strlen(a)<=i?a[i+(strlen(a)-strlen(b))]:48)-b[i];  
+	if(i!=0&&ab[i]<0){ab[i]+=10,ab[i-1]--;}   
+	}    
+	if(not ab[0]==0){if(ab[0]<0)h+="-"; h+=abs(ab[0])+48;}   
+	For(i,1,max(strlen(a),strlen(b))-1)if(ab[i]!=0||first){h+=ab[i]+48,first=true;};    
+	return h;
+}
+
+
+
+
+
+
+
