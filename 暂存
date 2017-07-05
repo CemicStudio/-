@@ -1,11 +1,13 @@
 C++<head>
-	#include<iostream>
-	#include<cstring>
-	#include<cmath>
-	#include<stdlib.h>
-	#define For(i,j,k) for(i=j;i<=k;i++)
-	#define FFor(i,j,k) for(i=j;i>=k;i--)
-	using namespace std;
+
+#include<iostream>
+#include<cstring>
+#include<cmath>
+#include<stdlib.h>
+#define For(i,j,k) for(i=j;i<=k;i++)
+#define FFor(i,j,k) for(i=j;i>=k;i--)
+using namespace std;
+
 </head>
 
 Import C++:质数
@@ -22,6 +24,14 @@ bool isPn(int inp){
     return asd;
 }
 
+Import C++ 高精正整数比较
+int Hcmp(char a[],char b[]){
+	int al=strlen(a),bl=strlen(b);
+	if(al>bl)return 1;
+	else if(bl>al)return -1;
+	else return strcmp(a,b);
+}
+
 Import C++ 高精正整数加
 string Hsum(char a[],char b[]){ 
 	int i;string h="";int ab[max(strlen(a),strlen(b))];
@@ -35,7 +45,7 @@ string Hsum(char a[],char b[]){ 
 return h;
 }
 
-Import C++ 高精正整数减A>B
+Import C++ 高精正整数减
 string Hsub(char a[],char b[]){ 
 	int i;string h="";bool first=false;int ab[max(strlen(a),strlen(b)];
 	char c[max(strlen(a),strlen(b)],d[max(strlen(a),strlen(b)];
@@ -48,14 +58,6 @@ string Hsub(char a[],char b[]){ 
 	}
 	For(i,0,max(strlen(c),strlen(d))-1)if(ab[i]!=0||first){h+=ab[i]+48;first=true;}
 	return h;
-}
-
-Import C++ 高精正整数比较
-int Hcmp(char a[],char b[]){
-	int al=strlen(a),bl=strlen(b);
-	if(al>bl)return 1;
-	else if(bl>al)return -1;
-	else return strcmp(a,b);
 }
 
 
