@@ -1,11 +1,12 @@
-C++:点
-struct point{
-	float x,y
-	float P_BT(point To){
-		return sprt(pow(abs(x-to.x()),2)+pow(abs(y-to.y()),2))
-	}
-	
-};
+C++<head>
+	#include<iostream>
+	#include<cstring>
+	#include<cmath>
+	#include<stdlib.h>
+	#define For(i,j,k) for(i=j,i<=k;i++)
+	#define FFor(i,j,k) for(i=j,i>=k;i--)
+	using namespace std;
+</head>
 
 Import C++:质数
 bool isPn(int inp){
@@ -21,7 +22,7 @@ bool isPn(int inp){
     return asd;
 }
 
-Import C++ 高精正整数加A>B
+Import C++ 高精正整数加
 string Hsum(char a[],char b[]){ int i;string h="";
 	FFor(i,max(strlen(a),strlen(b))-1,0){    
 		if(strlen(a)>strlen(b))ab[i]+=a[i]+(strlen(a)-i<=strlen(b)?b[i-(strlen(a)-strlen(b))]:48)-96;     
@@ -33,7 +34,7 @@ string Hsum(char a[],char b[]){ int i;string h="";
 return h;
 }
 
-Import C++ 高精正整数减
+Import C++ 高精正整数减A>B
 string Hsub(char a[],char b[]){ 
 	int i;string h="";bool first=false;   
 	FFor(i,max(strlen(a),strlen(b))-1,0){     
