@@ -46,15 +46,16 @@ return h;
 }
 
 Import C++ 高精正整数减
-string Hsub(char a[],char b[]){ 
-	int i;string h="";bool first=false;int ab[max(strlen(a),strlen(b)];
-	char c[max(strlen(a),strlen(b)],d[max(strlen(a),strlen(b)];
-	if(Hcmp(a,b)==1){strcpy(a,c);strcpy(b,d);}
-	else {strcpy(a,d);strcpy(b,c);h+="-";}
-	FFor(i,max(strlen(c),strlen(d)-1,0){
-		if(strlen(c)>strlen(d))c[i]-(strlen(c)-i<=strlen(d)?b[i-(strlen(c)-strlen(d))]:48;
-		else ab[i]+=(strlen(c)-strlen(d)<=i?a[i+(strlen(c)-strlen(d))]:48)-b[i];
-		if(i!=0&&ab[i]<0){ab[i]+=10,ab[i-1]--;}
+string Hsub(char a[],char b[]){ 
+	int i;string h="";bool first=false;int ab[max(strlen(a),strlen(b))];
+	char c[max(strlen(a),strlen(b))],d[max(strlen(a),strlen(b))];
+	if(Hcmp(a,b)==1){strcpy(c,a);strcpy(d,b);}
+	else if(Hcmp(a,b)==0)return "0";
+	else {strcpy(d,a);strcpy(c,b);h+="-";}
+	FFor(i,max(strlen(c),strlen(d))-1,0)ab[i]=0;
+	FFor(i,max(strlen(c),strlen(d))-1,0){
+		ab[i]+=(c[i]-((strlen(c)-strlen(d)<=i)?d[i-(strlen(c)-strlen(d))]:48));
+		if(ab[i]<0){ab[i]+=10;ab[i-1]--;}
 	}
 	For(i,0,max(strlen(c),strlen(d))-1)if(ab[i]!=0||first){h+=ab[i]+48;first=true;}
 	return h;
