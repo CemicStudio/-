@@ -63,9 +63,20 @@ string Hsub(char a[],char b[]){
 	return h;
 }
 
-string Hmul(char a[],char b[]){ if(a[0]=='0'||b[0]=='0')return "0"; int i,j,u,ab[strlen(a)+strlen(b)];bool first=false;string h=""; For(i,0,strlen(a)+strlen(b))ab[i]=0; FFor(i,strlen(a)-1,0){  FFor(j,strlen(b)-1,0){   ab[i+j+1]+=(a[i]-48)*(b[j]-48);   ab[i+j]+=ab[i+j+1]/10;ab[i+j+1]%=10;  } } For(u,0,strlen(a)+strlen(b)-1)if(ab[u]!=0||first){h+=(ab[u]+48);first=true;} return h;}
-
-
+Import C++高精度正整数乘
+string Hmul(char a[],char b[]){ if(a[0]=='0'||b[0]=='0')return "0"; 
+	int i,j,u,ab[strlen(a)+strlen(b)];
+	bool first=false;string h=""; 
+	For(i,0,strlen(a)+strlen(b))ab[i]=0; 
+	FFor(i,strlen(a)-1,0){  
+		FFor(j,strlen(b)-1,0){   
+			ab[i+j+1]+=(a[i]-48)*(b[j]-48);   
+			ab[i+j]+=ab[i+j+1]/10;ab[i+j+1]%=10;  
+		} 
+	} 
+	For(u,0,strlen(a)+strlen(b)-1)if(ab[u]!=0||first){h+=(ab[u]+48);first=true;} 
+return h;
+}
 
 
 
