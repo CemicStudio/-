@@ -78,5 +78,26 @@ string Hmul(char a[],char b[]){ if(a[0]=='0'||b[0]=='0')return "0";
 return h;
 }
 
+Import C++ 高精正正除正Long Long
+string LHdiv(char a[],long long b){
+	int i,ab[strlen(a)];long long BC=0;bool first=false;string h;
+	For(i,0,strlen(a)-1)ab[i]=0;
+	For(i,0,strlen(a)-1){
+		BC*=10;BC+=a[i]-48;
+		ab[i]=BC/b;BC%=b;
+	}
+	For(i,0,strlen(a)-1)if(ab[i]!=0||first){h+=(ab[i]+48);first=true;}
+	return h;
+}
+
+
+
+
+
+
+
+
+
+
 
 
