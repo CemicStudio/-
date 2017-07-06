@@ -63,7 +63,7 @@ string Hsub(char a[],char b[]){
 	return h;
 }
 
-Import C++高精度正整数乘
+Import C++高精度正整数乘/高精正小数乘
 string Hmul(char a[],char b[]){ if(a[0]=='0'||b[0]=='0')return "0"; 
 	int i,j,u,ab[strlen(a)+strlen(b)];
 	bool first=false;string h=""; 
@@ -76,6 +76,29 @@ string Hmul(char a[],char b[]){ if(a[0]=='0'||b[0]=='0')return "0";
 	} 
 	For(u,0,strlen(a)+strlen(b)-1)if(ab[u]!=0||first){h+=(ab[u]+48);first=true;} 
 return h;
+}
+string HDmul(char *a,char *b){
+	int i,j,u;int lena=strlen(a),lenb=strlen(b);string h="";
+	For(i,1,lena)if(a[lena-i]=='.')break;
+	For(j,1,lenb)if(b[lenb-j]=='.')break;
+	if(i==strlen(a))i=0;if(j==strlen(b))j=0;
+	if(i+j==0)return Hmul(a,b);
+	if(i>j){
+		while(j<i){
+			j++;
+			b[strlen(b)]=48;
+		}
+	}else if(j>i){
+		while(j>i){
+			i++;
+			a[strlen(a)]=48;
+		}
+	}
+	For(u,strlen(a)-i,strlen(a)-2)a[u]=a[u+1];a[u]=0;
+	For(u,strlen(b)-j,strlen(b)-2)b[u]=b[u+1];b[u]=0;
+	h=Hmul(a,b);
+	h.insert(h.size()-i-j+2,".");
+	return h;
 }
 
 Import C++ 高精正正除正Long Long
