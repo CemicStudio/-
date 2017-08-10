@@ -64,7 +64,9 @@ string Hsub(char a[],char b[]){
 }
 
 Import C++高精度正整数乘/高精正小数乘
-string Hmul(char a[],char b[]){ if(a[0]=='0'||b[0]=='0')return "0"; 
+
+string Hmul(char a[],char b[]){ 
+	if(a[0]=='0'||b[0]=='0')return "0"; 
 	int i,j,u,ab[strlen(a)+strlen(b)];
 	bool first=false;string h=""; 
 	For(i,0,strlen(a)+strlen(b))ab[i]=0; 
@@ -77,6 +79,13 @@ string Hmul(char a[],char b[]){ if(a[0]=='0'||b[0]=='0')return "0";
 	For(u,0,strlen(a)+strlen(b)-1)if(ab[u]!=0||first){h+=(ab[u]+48);first=true;} 
 return h;
 }
+
+H高精，I整，Z正整。
+void HIZmul(int *a,int *b,int len1,int len2,int *back){
+	for(int i=0;i<=len1-1;i++)for(int j=0;j<=len2-1;j++)back[i+j]+=a[i]*b[j];
+	for(int i=0;i<=len1+len2-1;i++){back[i+1]+=back[i]/10;back[i]%=10;}
+}//精简版，取代Hmul//逆序输入输出
+
 string HDmul(char *a,char *b){
 	int i,j,u;int lena=strlen(a),lenb=strlen(b);string h="";
 	For(i,1,lena)if(a[lena-i]=='.')break;
@@ -101,7 +110,7 @@ string HDmul(char *a,char *b){
 	return h;
 }
 
-Import C++ 高精正正除正Long Long
+Import C++ 高精正整数除正Long Long
 string LHdiv(char a[],long long b){
 	int i,ab[strlen(a)];long long BC=0;bool first=false;string h;
 	For(i,0,strlen(a)-1)ab[i]=0;
