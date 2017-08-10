@@ -46,6 +46,10 @@ string Hsum(char a[],char b[]){   
 	return h;
 }
 
+void HIZsum(int *a,int *b,int len1,int len2,int *back){
+	for(int i=0;i<=max(len1,len2);i++)back[i]+=a[i]+b[i];
+	for(int i=0;i<=max(len1,len2);i++){back[i+1]+=back[i]/10;back[i]%=10;}
+}//精简版，取代Hsum//逆序输入输出
 
 Import C++ 高精正整数减
 string Hsub(char a[],char b[]){ 
