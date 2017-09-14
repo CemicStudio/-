@@ -125,6 +125,11 @@ string LHdiv(char a[],long long b){
 	For(i,0,strlen(a)-1)if(ab[i]!=0||first){h+=(ab[i]+48);first=true;}
 	return h;
 }
+#include<bits/stdc++.h>
+#include <ext/pb_ds/tree_policy.hpp>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace std;
+using namespace __gnu_pbds;
 
 
 
