@@ -131,6 +131,10 @@ string LHdiv(char a[],long long b){
 using namespace std;
 using namespace __gnu_pbds;
 
+#include<bits/stdc++.h>using namespace std;int mod;
+union line_tree{ struct node{  long long lazy[2],num;int l,r; }tree[400000]; void push_up(int place)tree[place].num=(tree[place>>1|1].num+tree[place>>1].num)%mod; void push_down(){   } void build(int place,int down,int up){  if(up==down)return;   }};
+int main(){ int a,b;cin>>a>>b>>mod; }
+
 
 
 
