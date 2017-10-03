@@ -1,12 +1,44 @@
 C++<head>
 
-#include<iostream>
-#include<cstring>
-#include<cmath>
-#include<stdlib.h>
-#define For(i,j,k) for(i=j;i<=k;i++)
-#define FFor(i,j,k) for(i=j;i>=k;i--)
-using namespace std;
+#define import using namespace
+
+#define Dim(type) type
+#define Sub void
+#define sub
+#define Function(type) type
+#define function 
+#define as {
+#define As  
+#define integer
+#define Byval(type) type
+#define Byref(type) type * 
+
+#define Mod %
+#define IsNot !=
+#define Nothing NULL
+
+#define Else End else Then
+#define Elseif(combo) End else if(combo)
+#define Then {
+#define End }
+
+#define From
+#define To
+#define For(i,j,k) for(int i=j;i<=k;i++){
+#define Next }
+#define If 
+
+#define Do while(true){
+#define Loop }
+#define Exitdo break
+#define Exit return 
+
+#define Addressof &
+
+#define Readin(a) cin>>a
+#define Writeout(a) cout<<a
+
+#include <bits/stdc++.h>
 
 </head>
 
