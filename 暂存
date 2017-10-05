@@ -1,6 +1,5 @@
-C++<head>
-
 #define import using namespace
+#define Import using namespace
 
 #define Dim(type) type
 #define Sub void
@@ -10,6 +9,7 @@ C++<head>
 #define as {
 #define As  
 #define integer
+#define Integer
 #define Byval(type) type
 #define Byref(type) type * 
 
@@ -17,27 +17,34 @@ C++<head>
 #define IsNot !=
 #define Nothing NULL
 
+#define If if(
 #define Else End else Then
-#define Elseif(combo) End else if(combo)
-#define Then {
+#define Elseif End else If
+#define Then ) {
 #define End }
+#define Endif }
 
 #define From
-#define To
-#define For(i,j,k) for(int i=j;i<=k;i++){
+#define from
+#define To ;__temp__<=
+#define to ;__temp__>=
+#define Step(i) ;__temp__+=i){
+#define For for(int &__temp__=
 #define Next }
-#define If 
+
+#define Until while(!
+#define until 
+#define wend ){
 
 #define Do while(true){
 #define Loop }
 #define Exitdo break
 #define Exit return 
-
+#define Sleep _sleep
 #define Addressof &
 
-#define Readin(a) cin>>a
-#define Writeout(a) cout<<a
-
+#define Read(a) cin>>a
+#define Write(a) cout<<a
 #include <bits/stdc++.h>
 
 </head>
