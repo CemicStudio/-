@@ -218,7 +218,86 @@ int main(){
 
 
 
-
+<计算几何>
+namespace paint_main{
+	
+	float Q_rsqrt( float number ){
+	    long i;
+	    float x2, y;
+	    const float threehalfs = 1.5F;
+	
+	    x2  = number * 0.5F;
+	    y   = number;
+	    i   = * ( long * ) &y;
+	    i   = 0x5f3759df - ( i >> 1 );
+	    y   = * ( float * ) &i;
+	    y   = y * ( threehalfs - ( x2 * y * y ) );
+	 
+	    return y;
+	}  
+	
+	struct point{
+		float x,y;
+		point(const float _x,const float _y){
+			x = _x;
+			y = _y;
+		}
+		float _far_pp(const point &_to){
+			int _x_t = abs (_to.x - x);
+			int _y_t = abs (_to.y - y);
+			return sqrt( _x_t * _x_t + _y_t * _y_t );
+		}
+	};
+	struct line{
+		point p1    = * new point(0.0f,0.0f);
+		point p2    = * new point(0.0f,0.0f);
+		float slope = 0.f;
+		float c     = 0.f; 
+		
+		line(const point &_p1,const point &_p2){
+			p1 = _p1;
+			p2 = _p2;
+			slope = (p1.y - p2.y) / (p1.x - p2.x);
+			c     = (p1.y - p1.x * slope);
+		}
+		float _far_lp(const point &_to){
+			float   _back   = Q_rsqrt (slope * slope + 1 );
+			float   _bedown = abs     (slope * _to.x - _to.y + c);
+			return  _back * _bedown;
+		}
+		point* _cro_p (const line  &_with){
+			float   _back   = _with.c - c;
+			float   _bedown = slope - _with.slope;
+			float   _x      =_back / _bedown;
+			return new point( _x , _x * slope + c);
+		}
+		bool  _cross (const line  &_with){
+			point _crop_ = * _cro_p(_with);
+			if(_crop_.x>p1.x){
+				if  ( _crop_.x > p2.x ){
+					return false;
+				}
+			}else if(_crop_.x == p1.x){
+					return true;
+			}else {
+				if  ( _crop_.x < p2.x ){
+					return false;
+				}
+			}
+			return true;
+		}
+	};
+	std::ostream &operator << (std::ostream&, point& B){
+		std::cout << "(" << B.x << "," << B.y << ")";
+	}
+	std::ostream &operator << (std::ostream&, line& B){
+		                      std::cout << "y=";
+		if(B.slope < 0)       std::cout << "-";
+		if(B.slope == 0)     {std::cout << B.c;return std::cout;}
+		if(abs(B.slope) != 1) std::cout << abs(B.slope);
+		                      std::cout << "x" << B.c << "\n";
+	}	
+}
 
 
 
